@@ -6,169 +6,166 @@
 <meta charset="UTF-8">
 <title>Ticketing Application</title>
 <style type="text/css">
-body {
-   background-image: url('Background.jpeg');
-   background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    background-blend-mode: multiply;
+ * {
+     margin: 0;
+	 padding: 0;
+     box-sizing: border-box;
 }
-h1 {
-    font-size: 40px;
-    color: wheat;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-button {
-    padding: 10px 20px;
-    padding-top: 10%;
-}
-h2 {
-    font-size: 30px;
+ .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:lightblue;
+	padding: 10px 20px;
     color: white;
-    margin-left: 5%;
 }
- .picture1 {
-    height: 400px;
-    width: 100%;
+		
+.navbar .title {
+  font-size: 1.5em;
+  font-weight: bold;
 }
-.container1 {
-    max-width: 600px;
-    background-color: white;
-    color: blue;
-    text-align: center;
-    width: 800px;
-    height: 60px;
+ .navbar .nav-links {
+   display: flex;
 }
- .btn-ticket {
-    background-color: greenyellow;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    margin-left: 40%;
- }
- .btn-login {
-    background-color: greenyellow;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 80px;
- }
- .btn-home {
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 18%;
- }
- .btn-about {
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 10%;
- }
- .btn-history {
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 10%;
- }
- .btn-feedback {
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 10%;
- }
+ .navbar .nav-links a {
+   color: white;
+   padding: 10px 15px;
+   text-decoration: none;
+   text-align: center;
+   margin-left: 10px;
+   border-radius: 5px;
+}
+.navbar .nav-links a:hover {
+   background-color: #555;
+}
 .container2 {
-    text-align: center;
-    margin-top: 250px;
-    margin-right: 50%;
+background-color:lightblue;
+margin-top:450px;
 }
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    margin-left: 5%;
-}
- p {
-    color: blanchedalmond;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: oblique;
-    font-size: 25px;
-    margin-left: 5%;
-    margin-top: 3%;
-}
-h3 {
-    color: red;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: oblique;
-    font-size: 25px;
-    margin-left: 10%;
-}
-h4 {
-    color: lightblue;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
-    font-style: oblique;
-}
-.p1 {
-    color: blue;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: oblique;
-    font-size: larger;
-}
-@media screen and (max-width: 1200px)
- {
-    header{
-        font-size: 200%;
-        text-align: center;
-        margin-top: 50px;
-    }
-    body {
-        width: 100%;
-        height: auto;
-    }
-}
-footer {
-    font: italic;
-    font-size: medium;
-    color: white;
-}
+.slideshow-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;    /* Set the width of the container */
+            height: 70vh;  /* Set the height of the container */
+            overflow: hidden;
+            border-radius: 10px; /* Optional: rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styling each slide */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fade 30s infinite;
+        }
+
+        /* Define fade animation */
+        @keyframes fade {
+            0%, 50% { opacity: 1; }
+            55%, 100% { opacity: 0; }
+        }
+
+        /* Position each slide with different images and animation delays */
+        .slide:nth-child(1) { background-image: url('slide 1.jpg'); animation-delay: 0s; }
+        .slide:nth-child(2) { background-image: url('slide4.jpg'); animation-delay: 5s; }
+        .slide:nth-child(3) { background-image: url('slide5.jpg'); animation-delay: 10s; }
+
+        /* Optional: Content in the middle of the page */
+        .content {
+            position: relative;
+            z-index: 1;
+            color: black;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+        font-size: 30px;
+        color: blue;
+        }
+        p {
+        tex-align: center;
+        color: goldenrod;
+        margin-left:20px;
+        margin-top: 10px;
+        font-size:38px;
+        }
+        p1 {
+         tex-align: center;
+        color: Black;
+        margin-left:20px;
+        margin-top: 10px;
+        font-size:38px;
+        }
+        p2 {
+        tex-align: center;
+        color: darkblue;
+        margin-left:20px;
+        margin-top: 5px;
+        font-size:23px;
+        }
 </style>
 </head>
 <body>
 <div class="container">
-        <h1>NORBUS TECHNOLOGY</h1>
-        <header class="d-flex justify-content-center align-items-center">
-            <button type="button" class="btn-home"><a href="Index.jsp">Home</a></button>
-            <button type="button" class="btn-about"><a href="https://norbusgh.com/">About Us</a></button>
-            <button type="button" class="btn-history"><a href="#">History</a></button>
-            <button type="button" class="btn-feedback"><a href="#">Feedback</a></button>
-            <button type="button" class="btn-login"><a href="Login.jsp"><b>Logout</b></a></button>
-        </header>
-            <main class="container">
-                <h2>Welcome!</h2>
-                <p>
-                Thank you for loging into our site. Our compitent and able team members are ready to receive your<br> problems and
-                suggestions and to respond to them with immediate effect.<br><br>
-                </p>
-                <h3><b>TO ISSUE A TICKET KINDLY HIT ON THE BUTTON BELOW!</b></h3><br>
-                <button type="button" class="btn-ticket"><a href="Ticket.jsp"><b>Ticket</b></a></button>
-                <button type="button" class="btn-ticket"><a href="#"><b>Users</b></a></button>
-            </main>
-            <hr>
-            <footer>
-                @Copyright 2007 (NORBUS TECHNOLOGY). All rights reserved.<br>
-                Location:Accra digital center, circle.<br>
-                Phone: +233 30 296 4012<br>
-                Website: www.norbusgh.com.
-            </footer>
+ <div class="navbar">
+    <div class="title">Ticketing Application</div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#">ADMIN</a>
+        <a href="Ticket-List.jsp">Ticket</a>
+        <a href="#biodata">Biodata</a>
+        <a href="Login.jsp" id="btn btn-Logouti" class="btn btn-login">Logout</a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</div>
+<h1>WELCOME</h1>
+<div class="slideshow-container">
+    <div class="slide">
+    	<p>
+    	Thank you for connecting with us through this platform.<br>
+    	We’re here to make it easy for you to report any issues, get support,<br>
+    	and track the resolution of your concerns every step of the way.
+    	</p>
+    </div>
+    <div class="slide">
+    	<p>
+    	Whether you’re facing a technical problem, need assistance with services,<br> 
+    	or simply have a question, our ticketing system is designed to provide you with a seamless experience.<br>
+    	Simply submit a ticket with your details, and our team will ensure you receive timely response.
+    	</p>
+    </div>
+    <div class="slide">
+    	<p1>
+    	How to Get Started:<br>
+
+        1. Create a Ticket: Click "Ticket" to share the details of your issue.<br>
+        2. Stay Updated: Our team will keep you informed as your ticket progresses.<br>
+        3. Get Resolutions Fast: Track your ticket status and communicate directly for quicker solutions.<br><br><br><br>
+        </p1>
+       <p2>
+        We’re committed to delivering the support you deserve. 
+        Thank you for reaching out to us with your concerns!
+       </p2>
+       
+    	
+    </div>
+</div>
+
+<div class="container2">
+  <footer>
+     @Copyright 2007 (NORBUS TECHNOLOGY). All rights reserved.<br>
+     Location: Accra digital center, circle.<br>
+     Phone: +233 30 296 4012<br>
+     Website: www.norbusgh.com.
+   </footer>
+</div>
+    </div>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

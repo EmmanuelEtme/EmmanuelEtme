@@ -109,24 +109,24 @@ label {
         <h1 class="d-flex justify-content-center"><b>Sign Up</b></h1>
         <p>Fill in your details to sign up into Norbus Technology ticketing application</p>
         <div class="container1">
-            <form action="SignUpServlet" method="post" id="signUpForm">
+           <form action="UserController?action=addUser" method="post" id="signUpForm">
+           <input type="hidden" name="usertype" value="user">
                 <input type="hidden" id="userIndex" value="-1">
                 <label><b>Username:</b></label><br>
-                <input type="text" id="username" placeholder="Please enter your Username" name="username"/><br>
+                <input type="text" id="username" placeholder="Please enter your Username" name="username" required/><br>
                 <label><b>Full Name</b></label><br>
-                <input type="text" id="fullname" placeholder="Please enter your Full Name" name="fullname"/><br>
+                <input type="text" id="fullname" placeholder="Please enter your Full Name" name="fullname" required/><br>
                 <label><b>Email</b></label><br>
-                <input type="email" id="email" placeholder="Please enter your Email" name="email"/><br>
+                <input type="email" id="email" placeholder="Please enter your Email" name="email" required/><br>
                 <label><b>Phone</b></label><br>
-                <input type="text" id="phone" placeholder="Please enter your Phone Number" name="phone"/><br>
+                <input type="text" id="phone" placeholder="Please enter your Phone Number" name="phone" required/><br>
                 <label><b>Password</b></label><br>
-                <input type="password" id="password" placeholder="Please enter your Password" name="password"/><br>
+                <input type="password" id="password" placeholder="Please enter your Password" name="password" required/><br>
                 <label><b>Confirm Password</b></label><br>
-                <input type="password" id="confirmPassword" placeholder="Please confirm your Password" name="confirmPassword"/><br>
+                <input type="password" id="confirmPassword" placeholder="Please confirm your Password" name="confirmPassword" required/><br>
                 <div class="d-flex justify-content-center"><br>
-                    <button type="button" id="signUpBtn" class="btn btn-success"><a href="Succes.jsp"><b>Sign Up</b></a></button>
-                    <button type="button" id="updateBtn" class="btn btn-warning" style="display: none;"><b>Update</b></button>
-                <p>Already have an account?<button type="button" id="Login" class="btn btn-login"><a href="Login.jsp">Login</a></button>
+				<button type="submit" id="signUpBtn" class="btn btn-success"><b>Sign Up</b></button>
+				<p><i>Already have an account?</i> <a href="Login.jsp" id="Login" class="btn btn-login">Login</a></p>
                 </div>
             </form>
         </div>
@@ -134,108 +134,54 @@ label {
 
       <!-- JavaScript to handle form submission, view users, update, and delete users -->
     <script>
-        let selectedUserIndex = -1;
+    let selectedUserIndex = -1;
 
-        document.getElementById('signUpBtn').addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const fullname = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
+    function editUser(index) {
+        // Fetch users from localStorage (or other source if needed)
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users[index];
 
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
+        // Populate form fields with user data
+        document.getElementById('username').value = user.username;
+        document.getElementById('fullname').value = user.fullname;
+        document.getElementById('email').value = user.email;
+        document.getElementById('phone').value = user.phone;
+        document.getElementById('password').value = user.password;
+        document.getElementById('confirmPassword').value = user.password;
 
-            // Save user data to localStorage
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = { username, fullname, email, phone, password };
+        // Set selected user index to manage update
+        selectedUserIndex = index;
 
-            if (selectedUserIndex === -1) {
-                // New user, add to the list
-                users.push(user);
-            } else {
-                // Update existing user
-                users[selectedUserIndex] = user;
-                selectedUserIndex = -1;
-                document.getElementById('updateBtn').style.display = 'none'; // Hide the Update button
-                document.getElementById('signUpBtn').style.display = 'inline'; // Show the Sign Up button
-            }
+        // Show the Update button, hide the Sign-Up button if needed
+        document.getElementById('signUpBtn').style.display = 'none';
+        document.getElementById('updateBtn').style.display = 'inline';
+    }
 
-            localStorage.setItem('users', JSON.stringify(users));
+    function deleteUser(index) {
+        // Remove user from localStorage or the data source used
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users.splice(index, 1);
 
-            // Clear the form
-            document.getElementById('signUpForm').reset();
-        });
+        // Save the updated list back to localStorage
+        localStorage.setItem('users', JSON.stringify(users));
 
-        document.getElementById('viewUsersBtn').addEventListener('click', function() {
-            // Fetch users from localStorage
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const tableBody = document.getElementById('modalUserTableBody');
+        // Refresh user list view (use your method for updating displayed users)
+        // For example:
+        document.getElementById('viewUsersBtn').click();
+    }
 
-            // Clear the current table body content
-            tableBody.innerHTML = '';
+    document.getElementById('updateBtn').addEventListener('click', function() {
+        // Use the form submission if updating is server-side,
+        // Otherwise handle local update logic here.
+    document.getElementById('signUpForm').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Populate the modal table with user data
-            users.forEach((user, index) => {
-                const row = `<tr>
-                    <td>${index + 1}</td>
-                    <td>${user.username}</td>
-                    <td>${user.fullname}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone}</td>
-                    <td>
-                        <button type="button" class="btn btn-edit" onclick="editUser(${index})">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteUser(${index})">Delete</button>
-                    </td>
-                </tr>`;
-                tableBody.innerHTML += row;
-            });
-        });
-
-        function editUser(index) {
-            // Fetch users from localStorage
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users[index];
-
-            // Populate the form with the user's details
-            document.getElementById('username').value = user.username;
-            document.getElementById('fullname').value = user.fullname;
-            document.getElementById('email').value = user.email;
-            document.getElementById('phone').value = user.phone;
-            document.getElementById('password').value = user.password;
-            document.getElementById('confirmPassword').value = user.password;
-
-            // Set the selected user index for updating
-            selectedUserIndex = index;
-
-            // Hide the Sign Up button and show the Update button
-            document.getElementById('signUpBtn').style.display = 'none';
-            document.getElementById('updateBtn').style.display = 'inline';
-
-            // Close the modal
-            $('#viewUsersModal').modal('hide');
+        if (password !== confirmPassword) {
+            event.preventDefault(); // Prevents form from submitting
+            alert('Passwords do not match!');
         }
-
-        function deleteUser(index) {
-            // Fetch users from localStorage
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-
-            // Remove the selected user
-            users.splice(index, 1);
-
-            // Save the updated users list back to localStorage
-            localStorage.setItem('users', JSON.stringify(users));
-
-            // Refresh the user list view
-            document.getElementById('viewUsersBtn').click();
-        }
-
-        document.getElementById('updateBtn').addEventListener('click', function() {
-            document.getElementById('signUpBtn').click();
-        });
+    });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

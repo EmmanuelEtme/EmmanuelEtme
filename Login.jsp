@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Ticketing Application</title>
-</head>
-<body>
-  <style>
+ <style type="text/css">
     body {
      background-image: url('Digital.jpg');
       background-repeat: no-repeat;
@@ -64,7 +62,7 @@
     .btn-SignUp {
       padding: 10px 20px;
       background-color: transparent;
-      color: white;
+      color: blue;
       text-align: center;
       border: transparent;
     }
@@ -79,16 +77,16 @@
 
   <div class="d-flex flex-column justify-content-center align-items-center ">
     <form id="Loginform" class="form">
-      <label for="username"><b>Username:</b></label><br>
-      <input type="text" id="username" placeholder="Please enter your Username"/><br>
+     <label for="username"><b>Username:</b></label><br>
+<input type="text" id="username" name="username" placeholder="Enter your username">
+
 
       <label for="password"><b>Password</b></label><br>
       <input type="password" id="password" placeholder="Password"/><br><br>
-
       <button type="button" class="btn btn-forgotten"><i>Forgotten password?</i></button><br>
-      <button type="button" class="btn btn-success"><a href="Index.jsp"><b>Login</b></a></button>
+      <a href="Index.jsp" class="btn btn-success"><b>Login</b></a>
+     <p><b>Don't have an account?</b> <a href="SignUp.jsp" class="btn btn-SignUp"><i>Sign Up</i></a></p>
 
-      <p><b>Don't have an account?</b><button type="button" class="btn btn-SignUp"><a href="SignUp.jsp"><i>SignUp</i></a></button></p>
     </form>
   </div>
 </body>
